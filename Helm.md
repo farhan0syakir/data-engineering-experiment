@@ -108,3 +108,8 @@ airflow:
           name: my-dags-configmap
 ```
 This will mount the ConfigMap containing your DAGs to the /usr/local/airflow/dags directory in the Airflow web
+
+
+```
+kubectl create secret generic airflow-ssh-git-secret --from-file=gitSshKey=/home/farhan/.ssh/id_rsa -n airflow
+```
