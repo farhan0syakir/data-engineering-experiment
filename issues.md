@@ -16,3 +16,10 @@ airflow-triggerer-86d76c96f-4rdcd        2/2     Running   0               5m37s
 airflow-webserver-79d54575dc-tgdpc       1/1     Running   0               5m37s
 airflow-worker-0                         3/3     Running   0               5m32s
 ```
+
+
+kubectl exec -n airflow --stdin --tty airflow-dag-processor-74967685f7-xwssw -- /bin/bash 
+airflow jobs check --hostname $(hostname)
+
+(airflow)airflow jobs check --hostname $(hostname)
+No alive jobs found.
