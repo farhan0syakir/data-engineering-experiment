@@ -84,3 +84,9 @@ if __name__ == '__main__':
 kubectl get deployment airflow-dag-processor -n airflow -o yaml 
 ```
 
+
+helm show values airflow-1.8.0-dev > values.yaml
+helm upgrade --install airflow airflow-1.8.0-dev.tgz --namespace airflow --create-namespace --values values2.yaml
+
+
+dag_processor_liveness_check_command
