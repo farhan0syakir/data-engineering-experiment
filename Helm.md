@@ -120,5 +120,3 @@ kubectl create secret generic airflow-ssh-git-secret --from-file=gitSshKey=/home
 helm uninstall airflow -n airflow
 ```
 
-
-### Install helm from sources
