@@ -113,3 +113,12 @@ This will mount the ConfigMap containing your DAGs to the /usr/local/airflow/dag
 ```
 kubectl create secret generic airflow-ssh-git-secret --from-file=gitSshKey=/home/farhan/.ssh/id_rsa -n airflow
 ```
+
+
+### Uninstall
+```
+helm uninstall airflow -n airflow
+```
+
+
+### Install helm from sources

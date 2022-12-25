@@ -77,3 +77,10 @@ if __name__ == '__main__':
     unittest.main()
 
 ``` 
+
+
+### verify
+```
+kubectl get deployment airflow-dag-processor -n airflow -o yaml 
+```
+
