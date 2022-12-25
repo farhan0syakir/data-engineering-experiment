@@ -90,3 +90,13 @@ helm upgrade --install airflow airflow-1.8.0-dev.tgz --namespace airflow --creat
 
 
 dag_processor_liveness_check_command
+
+pyenv activate airflow-env
+breeze start-airflow
+
+
+pytest tests/utils/test_decorators.py
+
+pytest tests/charts -n auto
+
+breeze testing helm-tests  --python 3.8 
