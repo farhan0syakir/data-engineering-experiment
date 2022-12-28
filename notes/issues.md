@@ -105,3 +105,7 @@ todo
 remove --hostname
 1. find how to check liveness probe
 2. find how to check if dagsprocessor is working
+
+standalone_dag_processor
+
+1. understand lifycyle of scheduler in airflow
