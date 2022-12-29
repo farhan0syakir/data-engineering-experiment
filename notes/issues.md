@@ -109,3 +109,24 @@ remove --hostname
 standalone_dag_processor
 
 1. understand lifycyle of scheduler in airflow
+
+kubectl exec -n airflow -ti airflow-postgresql-0 -- /bin/bash 
+
+select distinct hostname from job
+where hostname like 'airflow%' 
+and hostname not like 'airflow-scheduler%'
+and hostname not like 'airflow-triggerer%';
+
+NAME                                 READY   STATUS    RESTARTS   AGE
+airflow-postgresql-0                 1/1     Running   0          9m59s
+airflow-redis-0                      1/1     Running   0          9m59s
+airflow-scheduler-6dc64c57d-z26cp    2/2     Running   0          9m59s
+airflow-statsd-64cdcfb8f8-h7cg8      1/1     Running   0          9m59s
+airflow-triggerer-784dff75b-bx9z4    1/1     Running   0          9m59s
+airflow-webserver-85945999b9-2knf9   1/1     Running   0          9m59s
+airflow-worker-0                     2/2     Running   0          9m59s
+
+
+alternative:
+    what indicate job is live? airflow jobs check only?
+        airflow/cli/commands/scheduler_command.py _run_scheduler_job
