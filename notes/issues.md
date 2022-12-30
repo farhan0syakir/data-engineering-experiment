@@ -99,6 +99,7 @@ pytest tests/utils/test_decorators.py
 pytest tests/charts -n auto
 breeze testing helm-tests  --python 3.8 
 pytest tests/charts/test_basic_helm_chart.py
+pytest tests/charts/test_basic_helm_chart.py -k test_basic_deployments --pdb
 
 ^^^^^^^^^^^
 todo
