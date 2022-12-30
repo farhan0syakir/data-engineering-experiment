@@ -133,3 +133,8 @@ alternative:
     can we use airflow jobs check --hostname (hostname_scheduler name?)
         - simulate jobs not workin (check in test code)
         - check if most recent scheduler still live?
+
+#### debug pytest
+$ pyenv activate airflow-env
+$ export AIRFLOW_HOME=/home/farhan/projects/airflow
+$ pytest --collect-only
