@@ -130,3 +130,6 @@ airflow-worker-0                     2/2     Running   0          9m59s
 alternative:
     what indicate job is live? airflow jobs check only?
         airflow/cli/commands/scheduler_command.py _run_scheduler_job
+    can we use airflow jobs check --hostname (hostname_scheduler name?)
+        - simulate jobs not workin (check in test code)
+        - check if most recent scheduler still live?
