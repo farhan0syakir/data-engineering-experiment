@@ -139,3 +139,9 @@ alternative:
 $ pyenv activate airflow-env
 $ export AIRFLOW_HOME=/home/farhan/projects/airflow
 $ pytest --collect-only
+
+
+SchedulerJob >> BaseJob >> get_hostname()
+SchedulerJob >> DagFileProcessorAgent >> DagFileProcessorManager
+
+_run_processor_manager
