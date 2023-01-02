@@ -140,8 +140,9 @@ $ pyenv activate airflow-env
 $ export AIRFLOW_HOME=/home/farhan/projects/airflow
 $ pytest --collect-only
 
-
-SchedulerJob >> BaseJob >> get_hostname()
-SchedulerJob >> DagFileProcessorAgent >> DagFileProcessorManager
-
+Not Stand Alone
+    SchedulerJob >> BaseJob >> get_hostname()
+    SchedulerJob >> DagFileProcessorAgent >> DagFileProcessorManager
+Stand Alone
+    Is not a job >> find command to check if processing is working fine
 _run_processor_manager
