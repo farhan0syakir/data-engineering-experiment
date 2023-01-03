@@ -151,4 +151,4 @@ Stand Alone
     pytest tests/cli/commands/test_dag_processor_command.py --pdb
     mock_dag_manager.return_value.start.assert_called()
     Dag Processor runs as a standalone component. Users need to start a scheduler job (airflow scheduler) and Dag Processor (airflow dag-processor) independently.
-    idea -> wrap the manager within a dag-processor-job?
+    idea -> wrap the manager within a dag-processor-job? probably using BaseJob or create new type job
