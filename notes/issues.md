@@ -142,9 +142,9 @@ $ pytest --collect-only
 
 Not Stand Alone
     SchedulerJob >> BaseJob >> get_hostname()
-    SchedulerJob >> DagFileProcessorAgent >> DagFileProcessorManager
+    SchedulerJob._execute() >> DagFileProcessorAgent.start >> DagFileProcessorManager.start()
 Stand Alone
-    DagFileProcessorManager
+    DagFileProcessorManager.start()
     Is not a job >> find command to check if processing is working fine
     _run_processor_manager
     TestDagProcessorCommand
@@ -152,3 +152,5 @@ Stand Alone
     mock_dag_manager.return_value.start.assert_called()
     Dag Processor runs as a standalone component. Users need to start a scheduler job (airflow scheduler) and Dag Processor (airflow dag-processor) independently.
     idea -> wrap the manager within a dag-processor-job? probably using BaseJob or create new type job
+    example -> _run_scheduler_job
+    /airflow/airflow/cli/commands/scheduler_command.py
