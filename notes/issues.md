@@ -154,3 +154,19 @@ Stand Alone
     idea -> wrap the manager within a dag-processor-job? probably using BaseJob or create new type job
     example -> _run_scheduler_job
     /airflow/airflow/cli/commands/scheduler_command.py
+
+Scheduler
+    basejob.run()
+        scheduler._execute()
+
+select * from job where job_type='DagProcessorJob';
+\c airflow
+DagProcessorJob not have start_date?
+ id | dag_id |  state  |    job_type     |          start_date           |           end_date            |       latest_heartbeat        | executor_class |   hostname   | unixname 
+----+--------+---------+-----------------+-------------------------------+-------------------------------+-------------------------------+----------------+--------------+----------
+  1 |        | success | DagProcessorJob |                               | 2023-01-06 07:08:32.292794+00 |                               |                |              | 
+  3 |        | failed  | SchedulerJob    | 2023-01-06 07:19:52.036351+00 |                               | 2023-01-06 07:48:06.059109+00 | LocalExecutor  | 468b239cf0a6 | root
+  5 |        | running | SchedulerJob    | 2023-01-06 08:02:18.636959+00 |                               | 2023-01-06 08:04:40.404723+00 | LocalExecutor  | d57ab1a66f16 | root
+  6 |        | running | TriggererJob    | 2023-01-06 08:02:18.752535+00 |                               | 2023-01-06 08:04:40.749677+00 | LocalExecutor  | d57ab1a66f16 | root
+  2 |        | running | TriggererJob    | 2023-01-06 07:00:40.616134+00 |                               | 2023-01-06 07:16:22.042025+00 | LocalExecutor  | 8f6e7ec7c2ba | root
+  4 |        | success | DagProcessorJob |                               | 2023-01-06 07:39:34.219752+00 |                               |                |              | 
