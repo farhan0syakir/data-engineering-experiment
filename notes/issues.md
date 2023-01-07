@@ -148,7 +148,6 @@ Stand Alone
     Is not a job >> find command to check if processing is working fine
     _run_processor_manager
     TestDagProcessorCommand
-    pytest tests/cli/commands/test_dag_processor_command.py --pdb
     mock_dag_manager.return_value.start.assert_called()
     Dag Processor runs as a standalone component. Users need to start a scheduler job (airflow scheduler) and Dag Processor (airflow dag-processor) independently.
     idea -> wrap the manager within a dag-processor-job? probably using BaseJob or create new type job
@@ -161,12 +160,31 @@ Scheduler
 
 select * from job where job_type='DagProcessorJob';
 \c airflow
-DagProcessorJob not have start_date?
- id | dag_id |  state  |    job_type     |          start_date           |           end_date            |       latest_heartbeat        | executor_class |   hostname   | unixname 
-----+--------+---------+-----------------+-------------------------------+-------------------------------+-------------------------------+----------------+--------------+----------
-  1 |        | success | DagProcessorJob |                               | 2023-01-06 07:08:32.292794+00 |                               |                |              | 
-  3 |        | failed  | SchedulerJob    | 2023-01-06 07:19:52.036351+00 |                               | 2023-01-06 07:48:06.059109+00 | LocalExecutor  | 468b239cf0a6 | root
-  5 |        | running | SchedulerJob    | 2023-01-06 08:02:18.636959+00 |                               | 2023-01-06 08:04:40.404723+00 | LocalExecutor  | d57ab1a66f16 | root
-  6 |        | running | TriggererJob    | 2023-01-06 08:02:18.752535+00 |                               | 2023-01-06 08:04:40.749677+00 | LocalExecutor  | d57ab1a66f16 | root
-  2 |        | running | TriggererJob    | 2023-01-06 07:00:40.616134+00 |                               | 2023-01-06 07:16:22.042025+00 | LocalExecutor  | 8f6e7ec7c2ba | root
-  4 |        | success | DagProcessorJob |                               | 2023-01-06 07:39:34.219752+00 |                               |                |              | 
+
+sed -i 's/standalone_dag_processor.*/standalone_dag_processor = True/g' ~/airflow/airflow.cfg
+pytest tests/cli/commands/test_dag_processor_command.py --pdb
+pytest tests/cli/commands/test_dag_command.py -k test_cli_report --pdb
+
+
+from airflow.configuration import conf
+conf.getboolean("core", "load_examples")
+
+conf.set("core", "load_examples","false")
+conf.set("scheduler","standalone_dag_processor","true")
+conf.getboolean("scheduler", "standalone_dag_processor")
+
+breeze --backend postgres --postgres-version 10 --python 3.8 --db-reset testing tests --test-type All
+
+=========================== short test summary info ============================
+SKIPPED [1] tests/providers/apache/hdfs/hooks/test_hdfs.py:28: could not import 'snakebite': No module named 'snakebite'
+ERROR tests/dags/test_invalid_dup_task.py - airflow.exceptions.DuplicateTaskI...
+ERROR tests/dags/subdir1/test_ignore_this.py - Exception: This dag file shoul...
+ERROR tests/dags_corrupted/test_impersonation_custom.py
+ERROR tests/providers/atlassian/jira/hooks/test_jira.py
+ERROR tests/providers/atlassian/jira/operators/test_jira.py
+ERROR tests/providers/atlassian/jira/sensors/test_jira.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 6 errors during collection !!!!!!!!!!!!!!!!!!!!
+============= 1 skipped, 63 warnings, 6 errors in 78.37s (0:01:18) =============
+
+
+todo fix duplications
