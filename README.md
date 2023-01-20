@@ -5,12 +5,12 @@ Dbt
 
 ### project
 airflow 
-- curl -> postgres
-- curl -> es
-- es -> es
 dbt
-- es -> es
-
+jenkins 
+helm
+artifactory
 
 ### Link
 Apache airflow installation on windows using [helm](Helm.md)
+
+### notes
